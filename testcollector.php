@@ -1,5 +1,32 @@
 <?php
 
+/**
+ * @file testcollector.php
+ * This file is part of Centrifuge.
+ *
+ * @brief Object that keeps the current state of run unit tests.
+ *
+ * @author Etenil <boss@etenil.net>
+ *
+ * @version 1.0
+ * @date  9 August 2012
+ *
+ * Copyright (C)2012 Centrifuge project.
+ *
+ * Centrifuge is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Centrifuge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Centrifuge.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 namespace centrifuge;
 
 class TestCollector
