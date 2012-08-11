@@ -33,7 +33,7 @@
 
 namespace centrifuge;
 
-ini_set('error_reporting', E_ALL ^E_NOTICE ^E_WARNING ^E_DEPRECATED);
+ini_set('error_reporting', E_ALL ^E_NOTICE ^E_WARNING ^E_DEPRECATED ^E_STRICT);
 
 // Loading the test library.
 require('testcollector.php');
@@ -58,11 +58,14 @@ class Runner
      */
     function run($argc, $argv)
     {
-        if($argc < 1 || $argc > 3) {
+        if($argc > 3) {
             return $this->usage();
         }
 
-        if($argc == 2) {
+        if($argv[1] == '--help') {
+            $this->usage();
+        }
+        else if($argc == 2) {
             $this->run_tests($argv[1]);
         }
         else if($argc == 3) {
@@ -76,17 +79,6 @@ class Runner
     protected function abspath($relpath)
     {
         return $_SERVER['PWD'] . '/' . $relpath;
-    }
-
-    /**
-     * Returns the full path to the test resources folder.
-     */
-    protected function res($path)
-    {
-        if(!file_exists($this->abspath('res'))) {
-            mkdir($this->abspath('res'));
-        }
-        return $this->abspath('res/') . $path;
     }
 
     protected function test_path($path = '')
@@ -165,7 +157,7 @@ class Runner
 
         $refl = new \ReflectionClass($classname);
         $meths = $refl->getMethods();
-        $class = new $classname($this->collector);
+        $class = new $classname($this->abspath('res/'));
 
         foreach($meths as $method) {
             $name = $method->name;
@@ -194,7 +186,7 @@ class Runner
     {
         printf("Runs unit tests.\n");
         printf("Usage:\n");
-        printf("    %s [test suite]\n", basename(__FILE__));
+        printf("    %s [test suite] [test name]\n", basename(__FILE__));
     }
 }
 

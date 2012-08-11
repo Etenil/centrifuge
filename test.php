@@ -32,11 +32,27 @@ namespace centrifuge;
 class Test
 {
     protected $collector;
+    protected $respath;
 
-    function __construct()
+    final function __construct($respath)
     {
+        $this->respath = $respath;
         $this->collector = TestCollector::get_instance();
+        $this->init();
     }
+
+    /**
+     * Returns the full path to the test resources folder.
+     */
+    protected function res($path)
+    {
+        if(!file_exists($this->respath)) {
+            mkdir($this->respath);
+        }
+        return $this->respath . $path;
+    }
+
+    protected function init() {}
 
     /**
      * Signals an error if the contained code returns false.
