@@ -33,11 +33,12 @@
 
 namespace centrifuge;
 
-ini_set('error_reporting', E_ALL ^E_NOTICE ^E_WARNING ^E_DEPRECATED ^E_STRICT);
+//ini_set('error_reporting', E_ALL ^E_NOTICE ^E_WARNING ^E_DEPRECATED ^E_STRICT);
+ini_set('error_reporting', E_ALL);
 
 // Loading the test library.
-require('testcollector.php');
-require('test.php');
+require(__DIR__ . '/testcollector.php');
+require(__DIR__ . '/test.php');
 
 /*^*********************************
  * Testing library.                *
@@ -118,7 +119,8 @@ class Runner
     protected function run_tests($testsuite = NULL, $testname = NULL)
     {
         // Let's first run the init stuff.
-        @include($this->abspath('test_init.php'));
+        if(file_exists($this->abspath('test_init.php')))
+            include($this->abspath('test_init.php'));
 
         if($testsuite && $testname) {
             $this->run_testsuite($testsuite, $testname);
@@ -135,11 +137,10 @@ class Runner
 
                 $this->run_testsuite($suite);
             }
+            closedir($testdir);
         }
 
         $this->collector->print_summary();
-
-        closedir($testdir);
     }
 
     protected function load_tests($dir, $testname)

@@ -1,6 +1,6 @@
 <?php
 
-class Test extends Centrifuge\Test
+class Test extends centrifuge\Test
 {
     function testAssert()
     {
