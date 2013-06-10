@@ -129,8 +129,8 @@ class TestCollector
         print "\n";
         print "Test summary:\n";
         printf("  Total tests:\t\t %d\n", $total);
-        printf("  Success:\t\t %d\n", $success);
-        printf("  Failures:\t\t %d\n", $failures);
+        printf("  Success:\t\t\t %d\n", $success);
+        printf("  Failures:\t\t\t %d\n", $failures);
         printf("  Success rate:\t\t %d%%\n", ($success / max($total, 1)) * 100);
 
         if($failures) {
