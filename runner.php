@@ -62,7 +62,7 @@ class Runner
             return $this->usage();
         }
 
-        if($argv[1] == '--help') {
+        if($argc > 1 && $argv[1] == '--help') {
             $this->usage();
         }
         else if($argc == 2) {
@@ -189,6 +189,4 @@ class Runner
         printf("    %s [test suite] [test name]\n", basename(__FILE__));
     }
 }
-
-?>
 
