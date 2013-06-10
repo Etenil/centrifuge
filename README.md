@@ -21,19 +21,26 @@ You can optionally specify which test suite to run and which specific
 test within the specified test suite to run.
 
 
+BOOTSTRAPING TESTS
+------------------
+Often some libraries will be required for all of your tests to run (and not matter for some others). Instead of requiring those by hand in each of the tests, you can simply use a bootstrap file.
+
+The bootstrap file is a PHP file that is loaded before any test is run. The file must be in the root of your suites and be named *test_init.php* exactly.
+
+
 ORGANISING TESTS
 ----------------
 The runner assumes that you organised your tests in a logical
 way. Tests are single php scripts and test suites are folders
 containing those. The typical test setup would be as follows:
 
-    -- Suite1
+    |- test_init.php
+    |- Suite1
     |  |- test1.php
     |  `- test2.php
     `- Suite2
        |- test1.php
        `- test2.php
-
 
 WRITING TESTS
 -------------
@@ -75,21 +82,9 @@ TEST METHODS
 The basic class centrifuge\Test provides a number of assertion
 methods. Below is a list of those.
 
-assert($val)
-:   ensures that $val evaluates to TRUE;
-nassert($val)
-:   ensures that $val does not evaluate to TRUE;
-equals($val1, $val2)
-:   ensures that $val1 and $val2 are equivalent. This test does not
-    compare the types, i.e. it uses == and not ===. Arrays are
-    supported and are tested recursively;
-differs($val1, $val2)
-:   asserts that $val1 and $val2 are different. As for equals, this
-    also supports arrays;
-match($regex, $val)
-:   asserts that $val matches the provided preg $regex. Don't forget
-    the delimiters in the regex;
-whitespace($pattern, $val)
-:   asserts that $val matches a whitespaced pattern where whitespace
-    is represented as '?'. For example 'test?1' will match 'test 1'
-    and 'test      1';
+* assert($val): ensures that $val evaluates to TRUE;
+* nassert($val): ensures that $val does not evaluate to TRUE;
+* equals($val1, $val2): ensures that $val1 and $val2 are equivalent. This test does not compare the types, i.e. it uses == and not ===. Arrays are supported and are tested recursively;
+* differs($val1, $val2): asserts that $val1 and $val2 are different. As for equals, this also supports arrays;
+* match($regex, $val): asserts that $val matches the provided preg $regex. Don't forget the delimiters in the regex;
+* whitespace($pattern, $val): asserts that $val matches a whitespaced pattern where whitespace is represented as '?'. For example 'test?1' will match 'test 1' and 'test      1';
